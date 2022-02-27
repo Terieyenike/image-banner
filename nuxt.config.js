@@ -35,10 +35,10 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: ["@nuxtjs/cloudinary"],
   cloudinary: {
+    cloudName: process.env.cloudName,
+    apiKey: process.env.apiKey,
+    apiSecret: process.env.apiSecret,
     useComponent: true,
-    cloudName: process.env.NUXT_ENV_CLOUDNAME,
-    apiKey: process.env.NUXT_ENV_API_KEY,
-    apiSecret: process.env.NUXT_ENV_API_SECRET,
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

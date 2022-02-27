@@ -1,11 +1,27 @@
 <template>
   <div class="mt-8">
-    <cld-image :public-id="publicId" width="1000">
-      <!-- <cld-transformation crop="fit" gravity="auto:subject" /> -->
-      <!-- <cld-transformation effect="brightness_hsb:-50" /> -->
-      <!-- <cld-transformation color="#FFFFFF" width="1300" crop="scale" /> -->
-      <!-- <cld-transformation flags="layer_apply" /> -->
-    </cld-image>
+      <cld-image ref="img" :public-id="publicId" responsive quality="auto">
+        <cld-transformation
+          :background="bgcolour"
+          crop="fit"
+          width="2000"
+          opacity="20"
+        />
+        <!-- crop="fit"
+          width="1500" -->
+        <cld-transformation
+          :overlay="{
+          fontFamily: 'Arial',
+          fontSize: 80,
+          fontWeight: 'bold',
+          text: message.toUpperCase(),
+        }"
+          :color="textColour"
+        />
+        <!-- crop="scale" -->
+        <cld-transformation flags="layer_apply"/>
+      </cld-image>
+
     <div class="mt-10">
       <h2 class="mb-2 text-gray-500 font-semibold">Copiable link</h2>
       <input
@@ -25,10 +41,7 @@
 
 <script>
 export default {
-  props: {
-    message: String,
-    publicId: String,
-  },
+  props: ["message", "publicId", "bgcolour", "textColour"],
   data() {
     return {
       url: "",
@@ -37,8 +50,16 @@ export default {
   },
   methods: {
     handleCopyLink() {
-      console.log("working!!!");
+      navigator.clipboard
+        .writeText(this.url)
+        .then(() => (this.copy = "Copied!"))
+        .catch((err) => console.log("error copying to clipboard", err));
     },
+  },
+  mounted() {
+    this.$nextTick(() => {
+      console.log(this.$refs.img.$el.className)
+    });
   },
 };
 </script>
