@@ -36,8 +36,8 @@ export default {
   modules: ["@nuxtjs/cloudinary"],
   cloudinary: {
     cloudName: process.env.cloudName,
-    apiKey: process.env.apiKey,
-    apiSecret: process.env.apiSecret,
+    // apiKey: process.env.apiKey,
+    // apiSecret: process.env.apiSecret,
     useComponent: true,
   },
 

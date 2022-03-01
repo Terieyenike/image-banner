@@ -1,37 +1,36 @@
 <template>
   <div class="mt-8">
-      <cld-image ref="img" :public-id="publicId" responsive quality="auto">
-        <cld-transformation
-          :background="bgcolour"
-          crop="fit"
-          width="2000"
-          opacity="20"
-        />
-        <!-- crop="fit"
-          width="1500" -->
-        <cld-transformation
-          :overlay="{
+    <cld-image ref="ref" :public-id="publicId">
+
+      <cld-transformation
+        :background="bgColour"
+        crop="fit"
+        opacity="20"
+        width="2000"
+      />
+      <cld-transformation
+        :color="textColour"
+        :overlay="{
           fontFamily: 'Arial',
           fontSize: 80,
           fontWeight: 'bold',
           text: message.toUpperCase(),
         }"
-          :color="textColour"
-        />
-        <!-- crop="scale" -->
-        <cld-transformation flags="layer_apply"/>
-      </cld-image>
+      />
+            <cld-transformation flags="layer_apply"/>
+
+    </cld-image>
 
     <div class="mt-10">
       <h2 class="mb-2 text-gray-500 font-semibold">Copiable link</h2>
       <input
         :value="url"
-        disabled
         class="w-full border-gray-300 rounded-sm border p-2"
+        disabled
       />
       <button
-        @click="handleCopyLink"
         class="bg-green-400 py-3 px-6 font-semibold tracking-normal mt-6 text-gray-900"
+        @click="handleCopyToClip"
       >
         {{ copy }}
       </button>
@@ -41,7 +40,7 @@
 
 <script>
 export default {
-  props: ["message", "publicId", "bgcolour", "textColour"],
+  props: ["message", "publicId", "bgColour", "textColour"],
   data() {
     return {
       url: "",
@@ -49,7 +48,7 @@ export default {
     };
   },
   methods: {
-    handleCopyLink() {
+    handleCopyToClip() {
       navigator.clipboard
         .writeText(this.url)
         .then(() => (this.copy = "Copied!"))
@@ -58,8 +57,9 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      console.log(this.$refs.img.$el.className)
+      this.url = this.$refs.ref.$el.src
     });
   },
 };
 </script>
+

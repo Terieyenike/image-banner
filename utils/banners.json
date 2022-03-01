@@ -1,10 +1,12 @@
 [
   {
     "id": 1,
-    "publicId": "pexels-christina-morillo-1181681_itscxa"
+    "publicId": "pexels-christina-morillo-1181681_itscxa",
+    "alt":  "woman on her laptop"
   },
   {
     "id": 2,
-    "publicId": "pexels-hasan-albari-1229861_njoool"
+    "publicId": "pexels-hasan-albari-1229861_njoool",
+    "alt": "workstation"
   }
 ]
