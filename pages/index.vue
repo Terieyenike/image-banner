@@ -5,30 +5,32 @@
       <h1 class="text-gray-900 text-lg mb-2 font-bold uppercase md:text-3xl lg:text-2xl">Image Banner Generator</h1>
 
       <form @submit.prevent="handleSubmit">
-        <!--        <section class="mb-6">-->
-        <label className="mb-2 md:text-2xl lg:text-base">
-          Select an image
-        </label>
-        <div class="mb-4">
-          <div class="flex items-center">
-            <div
-              v-for="item in banners"
-              :key="item.id"
-              :class="item.id === imageId ? 'border-4 border-green-700' : ''"
-              class="mr-2 shadow-md"
-              @click="handleSelectedImg(item.id, item.publicId)"
-            >
-              <cld-image :alt="item.alt" :public-id="item.publicId">
-                <cld-transformation crop="fill" height="100" width="100"/>
-              </cld-image>
+        <template v-if="banners.length > 0" class="mb-6">
+          <label className="mb-2 md:text-2xl lg:text-base">
+            Select an image
+          </label>
+          <div class="mb-4">
+            <div class="flex items-center">
+              <div
+                v-for="item in banners"
+                :key="item.id"
+                :class="item.id === imageId ? 'border-4 border-green-700' : ''"
+                class="mr-2 shadow-md"
+                @click="handleSelectedImg(item.id, item.publicId)"
+              >
+                <cld-image :alt="item.alt" :public-id="item.publicId">
+                  <cld-transformation crop="fill" height="100" width="100"/>
+                </cld-image>
+              </div>
             </div>
-          </div>
 
-          <p v-if="formData.error" class="text-red-700 mt-1 text-sm font-semibold md:text-lg lg:text-base">
-            Please select an image
-          </p>
-        </div>
-        <!--        </section>-->
+            <p v-if="formData.error" class="text-red-700 mt-1 text-sm font-semibold md:text-lg lg:text-base">
+              Please select an image
+            </p>
+          </div>
+        </template>
+
+        <template v-else>Please include images in its library</template>
         <div class="mb-8">
           <label class="block mb-3 md:text-2xl lg:text-base">Image Title</label>
           <input
